@@ -6,7 +6,7 @@ def matrix_shape(matrix):
      num_rows=len(mat1)
      num_cols=len(mat1)
      matrix_shape=[]
-        while (type(matrix) is list):
-            matrix_shape.append(len(matrix))
-        matrix = matrix[0]
-        return matrix_shape
+     while (type(matrix) is list):
+         matrix_shape.append(len(matrix))
+         matrix = matrix[0]
+return matrix_shape(matrix)
