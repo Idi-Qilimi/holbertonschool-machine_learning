@@ -2,7 +2,8 @@
 
 matrix_shape = __import__('2-size_me_please').matrix_shape
 def matrix_shape(matrix):
+     mat = []
      while (type(matrix) is list):
-         matrix_shape.append(len(matrix))
-         matrix = matrix[0]
-    return matrix_shape
+         mat.append(len(matrix))
+         mat = matrix[0]
+    return matrix
