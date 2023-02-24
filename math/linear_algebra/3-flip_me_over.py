@@ -6,7 +6,7 @@ def matrix_transpose(matrix):
     """Transpose matrix"""
     matrix_tran = []
     for i in range(len(matrix[0])):
-        row=[]
+        row = []
         for j in range(len(matrix)):
             row.append(matrix[j][i])
         matrix_tran.append(row)
