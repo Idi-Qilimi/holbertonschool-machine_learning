@@ -1,4 +1,9 @@
+#!/usr/bin/env python3
+"""Transpose matrix"""
+
+
 def matrix_transpose(matrix):
+    """Transpose matrix"""
     matrix_tran = []
     for i in range(len(matrix[0])):
         row=[]
