@@ -2,7 +2,7 @@
 """Concatenate matrices along axis"""
 
 
-def cat_matrices2D(mat1, mat2, axis=0):
+def cat_matrices2D(mat1, mat2, axis = 0):
     """Concatenate matrices along axis"""
     new_matrix = []
     if axis == 0:
