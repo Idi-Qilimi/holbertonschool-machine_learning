@@ -2,7 +2,6 @@
 """Shape of array"""
 
 
-import numpy as np
 def np_shape(matrix):
     """Shape of array"""
     shape = []
