@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Element-wise math"""
 
+import numpy as np
 def np_elementwise(mat1, mat2):
     """Element-wise math"""
     result = []
