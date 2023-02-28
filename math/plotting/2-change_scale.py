@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+"""Line graph"""
+
+
+import numpy as np
+"""Line graph"""
+
+
+import matplotlib.pyplot as plt
+"""Line graph"""
+
+
+x = np.arange(0, 28651, 5730)
+r = np.log(0.5)
+t = 5730
+y = np.exp((r / t) * x)
+
+plt.plot(x, y)
+plt.title("Exponential Decay of C-14")
+plt.xlabel("Time (years)")
+plt.ylabel("Fraction Remaining")
+plt.xlim(0, 28500)
+plt.yscale("log")
