@@ -3,7 +3,7 @@
 
 
 def summation_i_squared(n):
-"""Sum of Squares"""
+    """Sum of Squares"""
 
     
     if type(n) is not int or n < 1:
