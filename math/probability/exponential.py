@@ -21,7 +21,7 @@ class Exponential:
             return 0
         e = 2.7182818285
         lambtha = self.lambtha
-        pdf = lambtha * e ** (-lambtha * x)
+        pdf = lambtha * (e ** (-lambtha * x))
         return pdf
 
     def cdf(self, x):
