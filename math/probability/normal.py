@@ -4,6 +4,7 @@
 class Normal:
     """class that represents normal distribution"""
 
+
     def __init__(self, data=None, mean=0., stddev=1.):
         """class constructor"""
         if data is None:
