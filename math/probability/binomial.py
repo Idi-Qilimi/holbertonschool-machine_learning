@@ -45,10 +45,10 @@ class Binomial:
             n_factorial = 1
             for i in range(n):
                 n_factorial *= (i + 1)
-                k_factorial = 1
+            k_factorial = 1
             for i in range(k):
                 k_factorial *= (i + 1)
-                nk_factorial = 1
+            nk_factorial = 1
             for i in range(n - k):
                 nk_factorial *= (i + 1)
             binomial_co = n_factorial / (k_factorial * nk_factorial)
