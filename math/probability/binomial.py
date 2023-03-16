@@ -34,7 +34,7 @@ class Binomial:
                 self.p = p
 
         def pmf(self, k):
-            """calculates the value of the PMF for a given number of successes"""
+            """calculates value of the PMF for a given number of successes"""
             if type(k) is not int:
                 k = int(k)
             if k < 0:
@@ -56,7 +56,7 @@ class Binomial:
             return pmf
 
         def cdf(self, k):
-            """calculates the value of the CDF for a given number of successes"""
+            """calculates value of the CDF for a given number of successes"""
             if type(k) is not int:
                 k = int(k)
             if k < 0:
