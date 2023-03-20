@@ -10,11 +10,16 @@ def convolve_grayscale_same(images, kernel):
     """Performs a same convolution on grayscale images"""
     m, height, width = images.shape
     kh, kw = kernel.shape
-    out_w = (width - kw + 2) + 1
-    out_h = (height - kh + 2) + 1
-    convoluted = np.zeros((m, out_h - kh + 1, out_w - kw + 1))
-    for h in range(out_h - kh + 1):
-        for w in range(out_w - kw + 1):
-            out = np.sum(images[:, out_h:out_h+kh, out_w:out_w+kw]*kernel, axis=1).sum(axis=1)
-            convoluted[:, out_h, out_w] = out
+    if (kh % 2) == 1 and (kw % 2) == 1:
+        ph = (kh - 1) // 2
+        pw = (kw - 1) // 2
+    else:
+        ph = kh // 2
+        pw = kw // 2
+        images = np.pad(images, ((0, 0), (ph, ph), (pw, pw)))
+        convoluted = np.zeros((m, height, width))
+    for h in range(height):
+        for w in range(width):
+            output_conv = np.sum(images[:, h: h + kh, w + kw] * kernel, axis = 1).sum(axis = 1)
+            convoluted[:, h, w] = output_conv
     return convoluted
