@@ -28,7 +28,7 @@ def convolve_grayscale(images, kernel, padding='same', stride=(1, 1)):
     cw = ((width + (2*pw) - kw) // sw) + 1
     convoluted = np.zeros((m, ch, cw))
     i = 0
-    for h in range(0, height+(2*ph)-kh+1, sh):
+    for h in range(0, height + (2*ph) - kh + 1, sh):
         j = 0
         for w in range(0, width + (2 * pw) - kh + 1, sw):
             output_conv = np.sum(images[:, h:h+kh, w:w+kw]
