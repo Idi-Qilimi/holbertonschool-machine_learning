@@ -19,12 +19,12 @@ def pool(images, kernel_shape, stride, mode='max'):
         j = 0
         for w in range(0, width - kw + 1, sw):
             if mode == "max":
-                output = np.max(images[:, h: h + kh,
+                out = np.max(images[:, h: h + kh,
                                        width: width + kw, :], axis=(1, 2, 3))
             if mode == "average":
-                output = np.average(images[:, h: h + kh,
+                out = np.average(images[:, h: h + kh,
                                            width: width + kw, :], axis=(1, 2, 3))
-            pooled[:, i, j, :] = output
+            pooled[:, i, j, :] = out
             j += 1
         i += 1
     return pooled
