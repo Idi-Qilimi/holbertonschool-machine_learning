@@ -12,7 +12,7 @@ def pool(images, kernel_shape, stride, mode='max'):
     kh, kw = kernel_shape
     sh, sw = stride
     ph = ((height - kh) // sh) + 1
-    pw = ((weight - kw) // sw) + 1
+    pw = ((width - kw) // sw) + 1
     pooled = np.zeros((m, ph, pw, c))
     i = 0
     for h in range(0, height - kh + 1, sh):
