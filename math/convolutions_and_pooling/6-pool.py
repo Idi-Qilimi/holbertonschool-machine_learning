@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""pooling on images"""
+0;10;1c"""pooling on images"""
 
 
 import numpy as np
@@ -24,7 +24,7 @@ def pool(images, kernel_shape, stride, mode='max'):
             if mode == "average":
                 out = np.average(images[:, h: h + kh,
                                         width: width + kw, :], axis=(1, 2))
-            pooled[:, i, j] = out
+            pooled[:, i, j, :] = out
             j += 1
         i += 1
     return pooled
