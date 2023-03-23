@@ -21,7 +21,7 @@ def pool(images, kernel_shape, stride, mode='max'):
             if mode == "max":
                 out = np.max(images[:, h: h + kh,
                                     w: w + kw, :], axis=(1, 2))
-            elif mode == "average":
+            elif mode == "avg":
                 out = np.average(images[:, h: h + kh,
                                         w: w + kw, :], axis=(1, 2))
             else:
