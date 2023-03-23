@@ -19,7 +19,8 @@ def convolve(images, kernel, padding='same', stride=(1, 1)):
         pw = 0
     else:
         ph, pw = padding
-    images = np.pad(images, ((0, 0), (ph, ph), (pw, pw), (0, 0))
+    images = np.pad(images, ((0, 0), (ph, ph), (pw, pw), (0, 0)),
+                    'constant', constant_values=0)
     ch = ((height + (2 * ph) - kh) // sh) + 1
     cw = ((width + (2 * pw) - kw) // sw) + 1
     convoluted = np.zeros((m, ch, cw, nc))
