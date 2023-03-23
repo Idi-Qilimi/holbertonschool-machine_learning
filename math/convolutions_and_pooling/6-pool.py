@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+0;10;1c#!/usr/bin/env python3
 """pooling on images"""
 
 
@@ -15,15 +15,15 @@ def pool(images, kernel_shape, stride, mode='max'):
     pw = ((width - kw) // sw) + 1
     pooled = np.zeros((m, ph, pw, c))
     i = 0
-    for h in range(0, height - kh + 1, sh):
+    for h in range(0, (height - kh + 1), sh):
         j = 0
-        for w in range(0, width - kw + 1, sw):
+        for w in range(0, (width - kw + 1), sw):
             if mode == "max":
                 out = np.max(images[:, h: h + kh,
-                                    width: width + kw, :], axis=(1, 2, 3))
+                                    w: w + kw, :], axis=(1, 2))
             if mode == "average":
                 out = np.average(images[:, h: h + kh,
-                                        width: width + kw, :], axis=(1, 2, 3))
+                                        w: w + kw, :], axis=(1, 2))
             pooled[:, i, j, :] = out
             j += 1
         i += 1
