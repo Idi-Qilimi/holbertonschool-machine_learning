@@ -31,7 +31,7 @@ def convolve(images, kernel, padding='same', stride=(1, 1)):
             j = 0
             for w in range(0, (width + (2 * pw) - kw + 1), sw):
                 out = np.sum(images[:, h: h + kh, w: w + kw, :] * kernel_index,
-                                axis=1).sum(axis=1).sum(axis=1)
+                             axis=1).sum(axis=1).sum(axis=1)
                 convoluted[:, i, j, index] = out
                 j += 1
             i += 1
