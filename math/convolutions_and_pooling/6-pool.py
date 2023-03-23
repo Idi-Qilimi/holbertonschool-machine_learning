@@ -1,4 +1,4 @@
-0;10;1c#!/usr/bin/env python3
+#!/usr/bin/env python3
 """pooling on images"""
 
 
