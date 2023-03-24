@@ -8,8 +8,7 @@ import numpy as np
 
 def mean_cov(X):
     """Calculate mean and covariance of data set"""
-    data = X
-    n, d = data.shape
+    n, d = data
     if len(data) < 2:
         raise TypeError("X must be a 2d numpy.ndarray")
     if n < 2:
