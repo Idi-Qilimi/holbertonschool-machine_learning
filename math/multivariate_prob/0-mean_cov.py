@@ -11,8 +11,6 @@ def mean_cov(X):
     n, d = X.shape
     if len(X.shape) < 2:
         raise ValueError("X must contain multiple data points")
-    if len(n) < 2:
-        raise TypeError("X must must be a 2D numpy.ndarray")
     mean = np.mean(X, axis=0)
     cov = np.zeros((d, d))
     for i in range(n):
