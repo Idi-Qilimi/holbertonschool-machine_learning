@@ -2,7 +2,7 @@
 """intersection"""
 
 
-import numpyt as np
+import numpy as np
 """intersection"""
 
 
