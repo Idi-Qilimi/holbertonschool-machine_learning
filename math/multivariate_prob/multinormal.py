@@ -17,8 +17,9 @@ class MultiNormal:
             raise ValueError("data must contain multiple data points")
         self.mean, self.cov = mean_cov(data.T)
         self.mean = self.mean.reshape(-1, 1)
+
     def pdf(self, x):
-        """return the pdf """
+        """return the pdf"""
         if type(x) is not np.ndarray:
             raise TypeError("x must be a numpy.ndarray")
         d = self.cov.shape[0]
