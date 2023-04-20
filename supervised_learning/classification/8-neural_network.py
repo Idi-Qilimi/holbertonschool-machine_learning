@@ -9,12 +9,13 @@ import numpy as np
 class NeuralNetwork:
     """NN"""
     def __init__(self, nx, nodes):
+        """NN"""
         if type(nx) is not int:
-            raise TypeError("nx must be integer")
+            raise TypeError("nx must be an integer")
         if nx < 1:
             raise ValueError("nx must be a positive integer")
         if type(nodes) is not int:
-            raise TypeError("nodes must be integer")
+            raise TypeError("nodes must be an integer")
         if nodes < 1:
             raise ValueError("nodes must be a positive integer")
         self.W1 = np.random.randn(nodes, nx)
