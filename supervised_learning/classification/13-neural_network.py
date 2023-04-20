@@ -74,7 +74,6 @@ class NeuralNetwork:
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """gradient descent"""
         m = Y.shape[1]
-        #error output
         dz2 = (A2 - Y)
         d__W2 = (1 / m) * (np.matmul(dz2, A1.transpose()))
         d__b2 = (1 / m) * (np.sum(dz2, axis=1, keepdims=True))
