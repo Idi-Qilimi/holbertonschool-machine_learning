@@ -56,8 +56,9 @@ class NeuralNetwork:
         z2 = np.matmul(self.W2, self.__A1)+self.b2
         self.__A2 = 1 / (1 + (np.exp(-z2)))
         return (self.__A1, self.__A2)
+        
     def cost(self, Y, A):
-        """cost"""
+        """neural cost"""
         m = Y.shape[1]
         m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
         cost = (1 / m) * (-(m_loss))
