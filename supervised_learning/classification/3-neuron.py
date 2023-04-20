@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
- """calculates cost """
+"""mandatory"""
 
 
 import numpy as np
- """calculates cost """
+"""calculate"""
   
 
 class Neuron:
-    """calculates cost"""
+    """Neuron"""
     def __init__(self, nx):
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
@@ -16,7 +16,7 @@ class Neuron:
         self.__W = np.random.randn(1, nx)
         self.__b = 0
         self.__A = 0
-    
+
     @property
     def W(self):
         return (self.__W)
@@ -28,9 +28,9 @@ class Neuron:
     @property
     def A(self):
         return (self.__A)
-    
+
     def forward_prop(self, X):
-        """calculates cost """
+        """calculates forward prop"""
         z = np.matmul(self.W, X) + self.b
         self.__A = 1 / (1 + (np.exp(-z)))
         return (self.A)
