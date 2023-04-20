@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""NN"""
+"""neural network"""
 
 
 import numpy as np
-"""NN"""
+"""calculate"""
 
 
 class NeuralNetwork:
-    """NN"""
+    """class neural"""
     def __init__(self, nx, nodes):
-        """NN"""
+        """Initialisation"""
         if type(nx) is not int:
             raise TypeError("nx must be an integer")
         if nx < 1:
