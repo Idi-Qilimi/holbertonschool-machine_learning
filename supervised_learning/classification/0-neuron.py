@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""Perform binary classification"""
+
+import numpy as np 
+"""Perform binary classification"""
+
+
 class Neuron:
     """Perform binary classification"""
     def __init__(self, nx):
