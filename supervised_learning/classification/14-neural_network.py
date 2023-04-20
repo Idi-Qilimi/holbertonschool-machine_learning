@@ -86,6 +86,7 @@ class NeuralNetwork:
         self.__b1 = self.b1 - (alpha * d__b1)
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
+        """train neuron"""
         for itr in range(iterations):
             A1, A2 = self.forward_prop(X)
             self.gradient_descent(X, Y, A1, A2, alpha)
