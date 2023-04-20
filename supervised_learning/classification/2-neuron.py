@@ -29,7 +29,6 @@ class Neuron:
     def A(self):
         return (self.__A)
 
-
     def forward_prop(self, X):
         """Perform binary classification"""
         z = np.matmul(self.W, X) + self.b
