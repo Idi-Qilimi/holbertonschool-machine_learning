@@ -67,6 +67,10 @@ class DeepNeuralNetwork:
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """gradient descent deep neural network"""
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha < 1:
+            raise ValueError("alpha must be positive")
         m = Y.shape[1]
         back = {}
         for index in range(self.L, 0, -1):
