@@ -20,8 +20,9 @@ class DeepNeuralNetwork:
         for index, layer in enumerate(layers, 1):
             if type(layer) is not int or layer < 0:
                 raise TypeError("list of positive integers")
-            weights["b{}".format(index)]=np.zeros((layer, 1))
-            weights["W{}".format(index)]=np.random.randn(layer, previous) * np.sqrt(2 / previous)
+            weights["b{}".format(index)] = np.zeros((layer, 1))
+            weights["W{}".format(index)] = np.random.randn(layer, previous) * 
+                    np.sqrt(2 / previous)
         self.L = len(layers)
         self.cache = {}
         self.weights = weights
