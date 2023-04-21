@@ -67,10 +67,6 @@ class DeepNeuralNetwork:
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """gradient descent deep neural network"""
-        if type(alpha) is not float:
-            raise TypeError("alpha must be a float")
-        if alpha < 1:
-            raise ValueError("alpha must be positive")
         m = Y.shape[1]
         back = {}
         for index in range(self.L, 0, -1):
@@ -84,8 +80,8 @@ class DeepNeuralNetwork:
                     np.matmul(W_prev.transpose(), dz_prev) *
                     (A_current * (1 - A_current)))
             dz = back["dz{}".format(index)]
-            dW = (1/m) * (np.matmul(dz, A.transpose()))
-            db = (1/m) * (np.sum(dz, axis=1, keepdims=True))
+            dW = (1 / m) * (np.matmul(dz, A.transpose()))
+            db = (1 / m) * (np.sum(dz, axis=1, keepdims=True))
             W_prev = self.weights["W{}".format(index)]
             self.__weights["W{}".format(index)] = ( 
                 self.__weights["W{}".format(index)] * (alpha * dW))
