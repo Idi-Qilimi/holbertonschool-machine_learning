@@ -78,12 +78,12 @@ class DeepNeuralNetwork:
                 A_current = cache["A{}".format(index)]
                 back["dz{}".format(index)] = (
                     np.matmul(W_prev.transpose(), dz_prev) * 
-                             (A_current * (1 - A_current)))
+                    (A_current * (1 - A_current)))
             dz = back["dz{}".format(index)]
             dW = (1/m) * (np.matmul(dz, A.transpose()))
             db = (1/m) * (np.sum(dz, axis=1, keepdims=True))
             W_prev = self.weights["W{}".format(index)]
-            self.__weights["W{}".format(index)] = self.__weights["W{}".format(index)] *
-                                                  (alpha * dW)
-            self.__weights["b{}".format(index)] = self.__weights["b{}".format(index)] *
-                                                  (alpha * db)
+            self.__weights["W{}".format(index)] = self.__weights
+                                                  ["W{}".format(index)] * (alpha * dW)
+            self.__weights["b{}".format(index)] = self.__weights
+                                                  ["b{}".format(index)] * (alpha * db)
