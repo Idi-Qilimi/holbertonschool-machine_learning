@@ -25,6 +25,7 @@ class DeepNeuralNetwork:
             weights["b{}".format(index)] = np.zeros((layer, 1))
             weights["W{}".format(index)] = (np.random.randn(layer, previous) *
                                             np.sqrt(2 / previous))
+            previous = layer
         self.L = len(layers)
         self.cache = {}
         self.weights = weights
