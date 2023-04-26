@@ -5,6 +5,7 @@
 import tensorflow as tf
 """Calculate the accuracy of a prediction for the neural network"""
 
+
 def calculate_accuracy(y, y_pred):
     """Calculate the accuracy of a prediction for the neural network"""
     y_pred = tf.math.argmax(y_pred, axis=1)
