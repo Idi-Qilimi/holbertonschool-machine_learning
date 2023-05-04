@@ -10,9 +10,10 @@ import tensorflow as tf
 """All tasks together"""
 
 
-def model(Data_train, Data_valid, layers, activations, 
-          alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8, 
+def model(Data_train, Data_valid, layers, activations,
+          alpha=0.001, beta1=0.9, beta2=0.999, epsilon=1e-8,
           decay_rate=1, batch_size=32, epochs=5, save_path='./model.ckpt'):
+    """All tasks together"""
     X_train, y_train = Data_train
     X_valid, y_valid = Data_valid
     input_shape = X_train.shape[1:]
