@@ -2,10 +2,6 @@
 """Trains neural network model using mini-batch"""
 
 
-import numpy as np
-"""Trains neural network model using mini-batch"""
-
-
 import tensorflow as tf
 """Trains neural network model using mini-batch"""
 
@@ -27,7 +23,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
         accuracy = tf.get_collection('accuracy')[0]
         loss = tf.get_collection('loss')[0]
         train_op = tf.get_collection('train_op')[0]
-
         for epoch in range(epochs + 1):
             print("After {} epochs:".format(epoch))
             train_cost = sess.run(loss, feed_dict={x: X_train,
@@ -49,7 +44,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid, batch_size=32,
                 mini_batch_total = m // batch_size
             else:
                 mini_batch_total = (m // batch_size) + 1
-
             step_number = 0
             for mini_batch in range(mini_batch_total):
                 low = mini_batch * batch_size
