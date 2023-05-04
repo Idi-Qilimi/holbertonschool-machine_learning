@@ -2,6 +2,10 @@
 """All tasks together"""
 
 
+import numpy as np
+"""All tasks together"""
+
+
 import tensorflow as tf
 """All tasks together"""
 
@@ -36,5 +40,6 @@ def model(Data_train, Data_valid, layers, activations,
     model.compile(
     optimizer=optimizer, loss=loss_fn, metrics=[metric])
     history = model.fit(X_train, y_train, batch_size=batch_size,
-    epochs=epochs, validation_data=(X_valid, y_valid), callbacks=[lr_scheduler, model_checkpoint])
+    epochs=epochs, validation_data=(X_valid, y_valid),
+    callbacks=[lr_scheduler, model_checkpoint])
     return save_path
