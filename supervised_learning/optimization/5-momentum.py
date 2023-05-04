@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Variable Momentum""" 
+"""Variable Momentum"""
 
 
 import numpy as np
