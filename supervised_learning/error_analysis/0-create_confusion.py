@@ -6,6 +6,6 @@ import numpy as np
 """confusion matrix"""
 
 
- def create_confusion_matrix(labels, logits):
-        """confusion matrix"""
-        return np.matmul(labels.transpose(), logits)
+def create_confusion_matrix(labels, logits):
+  """confusion matrix"""
+  return np.matmul(labels.transpose(), logits)
