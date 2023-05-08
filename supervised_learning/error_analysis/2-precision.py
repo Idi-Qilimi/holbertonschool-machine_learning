@@ -10,5 +10,5 @@ def precision(confusion):
     """Precision"""
     tp = np.diag(confusion)
     fp = np.sum(confusion, axis=0) - tp
-    precision = tp / (tp + fp) 
+    precision = tp / (tp + fp)
     return precision
