@@ -7,7 +7,7 @@ import tensorflow.keras as K
 
 
 def save_weights(network, filename, save_format='h5'):
-   """Save and load weights"""
+    """Save and load weights"""
     network.save_weights(filename, save_format=save_format)
     return None
 
