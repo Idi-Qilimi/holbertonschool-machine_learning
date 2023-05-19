@@ -2,7 +2,7 @@
 """Layer with dropout"""
 
 
-import numpy as np
+import tensorflow as tf
 """Layer with dropout"""
 
 
