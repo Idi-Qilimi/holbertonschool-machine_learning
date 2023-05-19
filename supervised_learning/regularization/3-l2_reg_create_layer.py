@@ -2,10 +2,6 @@
 """Layer with l2 regularization"""
 
 
-import numpy as np
-"""Layer with l2 regularization"""
-
-
 import tensorflow as tf
 """Layer with l2 regularization"""
 
