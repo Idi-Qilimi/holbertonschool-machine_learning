@@ -2,10 +2,6 @@
 """Regularization Cost"""
 
 
-import numpy as np
-"""Regularization Cost"""
-
-
 import tensorflow as tf
 """Regularization Cost"""
 
