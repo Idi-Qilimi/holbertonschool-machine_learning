@@ -2,6 +2,7 @@
 """Identity block"""
 import tensorflow.keras as K
 
+
 def identity_block(A_prev, filters):
     """Identity block"""
     F11, F3, F12 = filters
