@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
+"""Le Net 5"""
+
+
 import tensorflow as tf
 """Le Net 5"""
 
 
 def lenet5(x, y):
     """Le Net 5"""
-    conv1 = tf.keras.layers.Conv2D(filters=6, kernel_size=5, padding='same', activation='relu', kernel_initializer='he_normal')(x)
-    pool1 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv1)
-    conv2 = tf.keras.layers.Conv2D(filters=16, kernel_size=5, padding='valid', activation='relu', kernel_initializer='he_normal')(pool1)
+    conv1 = tf.keras.layers.Conv2D(
+        filters=6, kernel_size=5, padding='same', activation='relu', kernel_initializer='he_normal')(x)
+    pool1 = tf.keras.layers.MaxPooling2D(
+        pool_size=2, strides=2)(conv1)
+    conv2 = tf.keras.layers.Conv2D(
+        filters=16, kernel_size=5, padding='valid', activation='relu', kernel_initializer='he_normal')(pool1)
     pool2 = tf.keras.layers.MaxPooling2D(pool_size=2, strides=2)(conv2)
     flatten = tf.keras.layers.Flatten()(pool2)
     fc1 = tf.keras.layers.Dense(120, activation='relu', kernel_initializer='he_normal')(flatten)
