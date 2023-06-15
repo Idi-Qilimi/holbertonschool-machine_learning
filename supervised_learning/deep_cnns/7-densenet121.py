@@ -12,7 +12,7 @@ def densenet121(growth_rate=32, compression=1.0):
     """DenseNet-121 network"""
     init = K.initializers.he_normal()
     activation = K.activations.relu
-    img_input = K.Input(shape=(224, 224, 3)) 
+    img_input = K.Input(shape=(224, 224, 3))
     Batch_NormC0 = K.layers.BatchNormalization(axis=3)(img_input)
     ReLUC0 = K.layers.Activation(activation)(Batch_NormC0)
     C0 = K.layers.Conv2D(filters=64,
