@@ -2,7 +2,7 @@
 """Convo back prop"""
 
 
-import numpy as np 
+import numpy as np
 """Convo back prop"""
 
 
