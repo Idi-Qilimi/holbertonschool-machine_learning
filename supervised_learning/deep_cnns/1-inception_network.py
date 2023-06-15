@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Inception Network"""
 import tensorflow.keras as K
+
+
 inception_block = inception_block
+"""Inception network"""
 
 
 def inception_network():
-    """Inception block"""
+    """Inception network"""
     init = K.initializers.he_normal()
     activation = K.activations.relu
     img_input = K.Input(shape=(224, 224, 3))
