@@ -9,11 +9,10 @@ import numpy as np
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
     """Gradient Descent with Dropout"""
     m = Y.shape[1]
-    back = {}    
+    back = {}
     for index in range(L, 0, -1):
         A = cache["A{}".format(index - 1)]
         if index == L:
-            # if last layer, calculate dz value as A - Y
             back["dz{}".format(index)] = (cache["A{}".format(index)] - Y)
             dz = back["dz{}".format(index)]
         else:
