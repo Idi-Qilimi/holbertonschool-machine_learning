@@ -8,7 +8,7 @@ class Yolo:
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
         self.model = load_model(model_path)
         with open(classes_path) as f:
-            self.class_names = [line.strip for line in f]
+            self.class_names = [line.strip() for line in f]
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
@@ -19,7 +19,7 @@ class Yolo:
         box_confidences = []
         box_class_probs = []
         for i in range(len(outputs)):
-            boxes.append(ouput[i][..., 4])
+            boxes.append(output[i][..., 4])
             box_confidences.append(1 / (1 + np.exp(-outputs[i][..., 4:5])))
             box_class_probs.append(1 / (1 + np.exp(-outputs[i][..., 5:])))
         image_height, image_width = image_size
