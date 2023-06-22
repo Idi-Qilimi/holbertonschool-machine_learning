@@ -2,6 +2,7 @@
 """Process Outputs Yolo"""
 import numpy as np
 
+
 class Yolo:
     """Initialize Yolo"""
     def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
@@ -32,7 +33,7 @@ class Yolo:
                         tx, ty, tw, th = boxes[i][cy, cx, b]
                         pw, ph = self.anchors[i][b]
                         bx = (1 / (1 + np.exp(-tx))) + cx
-                        by = (1 / (1 + np.exp(-ty))) + cy  
+                        by = (1 / (1 + np.exp(-ty))) + cy
                         bw = pw * np.exp(tw)
                         bh = ph * np.exp(th)
                         bx /= grid_width
