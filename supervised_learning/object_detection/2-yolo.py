@@ -19,7 +19,7 @@ class Yolo:
         box_confidences = []
         box_class_probs = []
         for i in range(len(outputs)):
-            boxes.append(ouput[i][..., 4])
+            boxes.append(output[i][..., 4])
             box_confidences.append(1 / (1 + np.exp(-outputs[i][..., 4:5])))
             box_class_probs.append(1 / (1 + np.exp(-outputs[i][..., 5:])))
         image_height, image_width = image_size
