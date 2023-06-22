@@ -1,0 +1,66 @@
+#!/usr/bin/env python3
+"""Process Outputs Yolo"""
+import numpy as np
+
+
+class Yolo:
+    """Initialize Yolo"""
+    def __init__(self, model_path, classes_path, class_t, nms_t, anchors):
+        self.model = load_model(model_path)
+        with open(classes_path) as f:
+            self.class_names = [line.strip for line in f]
+        self.class_t = class_t
+        self.nms_t = nms_t
+        self.anchors = anchors
+
+    def process_outputs(self, outputs, image_size):
+        """Process Outputs Yolo"""
+        boxes = []
+        box_confidences = []
+        box_class_probs = []
+        for i in range(len(outputs)):
+            boxes.append(ouput[i][..., 4])
+            box_confidences.append(1 / (1 + np.exp(-outputs[i][..., 4:5])))
+            box_class_probs.append(1 / (1 + np.exp(-outputs[i][..., 5:])))
+        image_height, image_width = image_size
+        for i in range(len(boxes)):
+            grid_width = outputs[i].shape[0]
+            grid_height = outputs[i].shape[1]
+            anchor_boxes = outputs[i].shape[2]
+            for cy in range(grid_height):
+                for cx in range(grid_width):
+                    for b in range(anchor_boxes):
+                        tx, ty, tw, th = boxes[i][cy, cx, b]
+                        pw, ph = self.anchors[i][b]
+                        bx = (1 / (1 + np.exp(-tx))) + cx
+                        by = (1 / (1 + np.exp(-ty))) + cy
+                        bw = pw * np.exp(tw)
+                        bh = ph * np.exp(th)
+                        bx /= grid_width
+                        by /= grid_height
+                        bw /= self.model.input.shape[1]
+                        bh /= self.model.input.shape[1]
+                        x1 = (bx - (bw / 2)) * image_width
+                        y1 = (by - (bh / 2)) * image_height
+                        x2 = (bx + (bw / 2)) * image_width
+                        y2 = (by + (bh / 2)) * image_height
+                        boxes[i][cy, cx, b] = [x1, y1, x2, y2]
+        return (boxes, box_confidences, box_class_probs)
+
+    def filter_boxes(self, boxes, box_confidences, box_class_probs):
+        """Filter boxes"""
+        filtered_boxes, box_classes, box_scores = None, [], []
+        for i in range(len(boxes)):
+            cur_box_score = box_confidences[i] * box_class_probs[i]
+            cur_box_class = np.argmax(cur_box_score, axis=-1)
+            cur_box_score = np.max(cur_box_score, axis=-1)
+            mask = cur_box_score >= self.class_t
+            if filtered_boxes is None:
+                filtered_boxes = boxes[i][mask]
+                box_scores = cur_box_score[mask]
+                box_classes = cur_box_class[mask]
+            else:
+                filtered_boxes = np.concatenate((filtered_boxes, boxes[i][mask]), axis =0)
+                box_classes = np.concatenate((box_classes, cur_box_class[i][mask]), axis=0)
+                box_scores = np.concatenate((box_scores, cur_box_score[mask]), axis=0)
+        return(filtered_boxes, box_classes, box_scores)
