@@ -8,6 +8,6 @@ class Yolo:
         self.model = load_model(model_path)
         with open(classes_path) as f:
             self.class_names = [line.strip for line in f]
-        self.class_t = class_t
-        self.nms_t = nms_t
-        self.anchors = anchors
+            self.class_t = class_t
+            self.nms_t = nms_t
+            self.anchors = anchors
