@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""Process Outputs Yolo"""
+"""Initialize Yolo"""
+from tensorflow.keras.models import load_model
 import numpy as np
+import glob
+import os
 
 
 class Yolo:
