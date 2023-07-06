@@ -26,8 +26,10 @@ class GRUCell:
         return h_next, y
 
     def sigmoid(self, x):
+        """Sigmoid"""
         return 1 / (1 + np.exp(-x))
 
     def softmax(self, x):
+        """Softmax"""
         exps = np.exp(x)
         return exps / np.sum(exps, axis=1, keepdims=True)
