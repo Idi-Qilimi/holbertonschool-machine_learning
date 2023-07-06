@@ -16,6 +16,7 @@ class GRUCell:
         self.by = np.zeros((1, o))
 
     def forward(self, h_prev, x_t):
+        """forward prop"""
         xh = np.concatenate((h_prev, x_t), axis=1)
         z = self.sigmoid(np.dot(xh, self.Wz) + self.bz)
         r = self.sigmoid(np.dot(xh, self.Wr) + self.br)
