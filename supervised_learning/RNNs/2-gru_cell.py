@@ -4,6 +4,7 @@ import numpy as np
 
 
 class GRUCell:
+    """GRU cell"""
     def __init__(self, i, h, o):
         self.Wz = np.random.normal(size=(i + h, h))
         self.Wr = np.random.normal(size=(i + h, h))
