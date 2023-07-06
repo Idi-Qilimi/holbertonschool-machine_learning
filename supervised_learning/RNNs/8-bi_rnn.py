@@ -5,6 +5,8 @@ import numpy as np
 
 def bi_rnn(bi_cell, X, h_0, h_t):
     """Forward prop bidirectional"""
+    t, m, i = X.shape
+    h = h_0.shape[1]
     H_for = np.zeros((t, m, h))
     H_back = np.zeros((t, m, h))
     h_ft = h_0
