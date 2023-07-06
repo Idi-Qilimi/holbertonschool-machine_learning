@@ -11,7 +11,7 @@ def rnn(rnn_cell, X, h_0):
     Y = np.zeros((t, m, rnn_cell.by.shape[1]))
     H[0] = h_0
     for step in range(t):
-        h_next, y = rnn_cell.forward(H[step], X[step])
-        H[step + 1] = h_next
-        Y[step] = y
-    return H[1:], Y
+        h_prev = H[step]
+        x_step = X[step]
+        H[step+1], Y[step] = rnn_cell.forward(h_prev, x_step)
+    return H, Y
