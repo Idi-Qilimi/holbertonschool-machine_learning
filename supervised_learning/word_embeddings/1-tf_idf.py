@@ -3,6 +3,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
+
 def tf_idf(sentences, vocab=None):
     """TF-IDF """
     vectorizer = TfidfVectorizer(vocabulary=vocab)
