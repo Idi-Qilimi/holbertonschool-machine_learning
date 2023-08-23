@@ -1,41 +1,69 @@
 #!/usr/bin/env python3
-"""N-gram BLEU score"""
+"""
+Calculates the unigram BLEU score for a sentence
+"""
 import numpy as np
+
+
+def n_grams(sentence, n):
+    """
+    Creates the n-grams from sentence
+    sentence: a list containing the model proposed sentence
+    n: the size of the n-gram to use for evaluation
+    """
+    list_grams_cand = []
+    for i in range(len(sentence)):
+        last = i + n
+        begin = i
+        if last >= len(sentence) + 1:
+            break
+        aux = sentence[begin: last]
+        result = ' '.join(aux)
+        list_grams_cand.append(result)
+    return list_grams_cand
 
 
 def ngram_bleu(references, sentence, n):
     """
-    Calculate the n-gram BLEU score for a sentence
-    :param references: list of reference translations
-    :param sentence: list containing the model proposed sentence
-    :param n: size of the n-gram to use for evaluation
-    :return: the n-gram BLEU score
+    Calculates the unigram BLEU score for a sentence
+    references: a list of reference translations
+    each reference translation is a list of the words in the translation
+    sentence: a list containing the model proposed sentence
+    n: the size of the n-gram to use for evaluation
     """
-    def get_ngrams(text, n):
-        """
-        Get ngrams for text
-        :param text: list of tokens
-        :param n: size of the n-gram
-        :return: dictionary of ngrams and their counts
-        """
-        ngrams = {}
-        for i in range(len(text)-n+1):
-            ngram = tuple(text[i:i+n])
-            if ngram in ngrams:
-                ngrams[ngram] += 1
-            else:
-                ngrams[ngram] = 1
-        return ngrams
-    # Calculate clipped precision for each reference
-    clipped_precision = []
-    candidate_ngrams = get_ngrams(sentence, n)
+    grams = list(set(n_grams(sentence, n)))
+    len_g = len(grams)
+    reference_grams = []
+    words_dict = {}
+
     for reference in references:
-        reference_ngrams = get_ngrams(reference, n)
-        clipped_count = 0
-        for ngram in candidate_ngrams:
-            if ngram in reference_ngrams:
-                clipped_count += min(candidate_ngrams[ngram], reference_ngrams[ngram])
-        clipped_precision.append(clipped_count)
-    # Calculate precision
-    precision = max(clipped_precision) / sum(candidate_ngrams.values())
-    return precision
+        list_grams = n_grams(reference, n)
+        reference_grams.append(list_grams)
+
+    for ref in reference_grams:
+        for word in ref:
+            if word in grams:
+                if word not in words_dict.keys():
+                    words_dict[word] = ref.count(word)
+                else:
+                    actual = ref.count(word)
+                    prev = words_dict[word]
+                    words_dict[word] = max(actual, prev)
+
+    candidate = len(sentence)
+    prob = sum(words_dict.values()) / len_g
+
+    best_match = []
+    for reference in references:
+        ref_len = len(reference)
+        diff = abs(ref_len - candidate)
+        best_match.append((diff, ref_len))
+
+    sort_tuple = sorted(best_match, key=(lambda x: x[0]))
+    best = sort_tuple[0][1]
+    if candidate > best:
+        bleu = 1
+    else:
+        bleu = np.exp(1 - (best / candidate))
+    score = bleu * np.exp(np.log(prob))
+    return score
