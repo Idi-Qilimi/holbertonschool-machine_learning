@@ -5,7 +5,7 @@ import numpy as np
 
 def uni_bleu(references, sentence):
     """
-    Calculates the unigram BLEU score 
+    Calculates the unigram BLEU score
     """
     sentence_length = len(sentence)
     references_length = []
