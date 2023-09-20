@@ -8,7 +8,6 @@ def kmeans(X, k, iterations=1000):
     """
     K-means on a data set
     """
-    
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None
     if not isinstance(k, int) or k <= 0:
