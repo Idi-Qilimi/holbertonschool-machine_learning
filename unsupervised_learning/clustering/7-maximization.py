@@ -3,34 +3,41 @@
 the likelihood of observing what we observed is maximized
 """
 import numpy as np
-kmeans = __import__('1-kmeans').kmeans
 
 
 def maximization(X, g):
     """
-    calculates the maximization step in the EM algorithm for a GMM
+    Calculates the maximization step in the EM algorithm for a GMM
+    :param X: numpy.ndarray of shape (n, d) containing the data set
+    :param g: numpy.ndarray of shape (k, n) containing the posterior
+    probabilities for each data point in each cluster
+    :return: pi, m, S, or None, None, None on failure
+        pi is a numpy.ndarray of shape (k,) containing the updated priors for
+        each cluster
+        m is a numpy.ndarray of shape (k, d) containing the updated centroid
+        means for each cluster
+        S is a numpy.ndarray of shape (k, d, d) containing the updated
+        covariance matrices for each cluster
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
+    if type(X) is not np.ndarray or len(X.shape) != 2:
         return None, None, None
-    if not isinstance(g, np.ndarray) or len(X.shape) != 2:
+    if type(g) is not np.ndarray or len(g.shape) != 2:
         return None, None, None
-    gaussian_components = g
-    k = gaussian_components.shape[0]
+    if X.shape[0] != g.shape[1]:
+        return None, None, None
+    cluster = np.sum(g, axis=0)
+    cluster = np.sum(cluster)
+    if int(cluster) != X.shape[0]:
+        return None, None, None
     n, d = X.shape
-    posterior_prob = np.sum(gaussian_components, axis=0)
-    check = np.sum(posterior_prob)
-    if check != X.shape[0]:
-        return None, None, None
-    priors = np.zeros((k,))
-    centroid_updated = np.zeros((k, d))
-    covariance_updated = np.zeros((k, d, d))
+    k, n = g.shape
+    nk = np.sum(g, axis=1)
+    pi = nk / n
+    mean = np.zeros((k, d))
+    cov = np.zeros((k, d, d))
     for i in range(k):
-        mu_up = np.sum((gaussian_components[i, :, np.newaxis] * X), axis=0)
-        mu_down = np.sum(gaussian_components[i], axis=0)
-        centroid_updated[i] = mu_up / mu_down
-        x_m = X - centroid_updated[i]
-        sigma_up = np.matmul(gaussian_components[i] * x_m.T, x_m)
-        sigma_down = np.sum(gaussian_components[i])
-        covariance_updated[i] = sigma_up / sigma_down
-        priors[i] = np.sum(gaussian_components[i]) / n
-    return priors, centroid_updated, covariance_updated
+        mean[i] = np.matmul(g[i], X) / nk[i]
+        norm = X - mean[i]
+        cov[i] = np.matmul(g[i] * norm.T, norm) / nk[i]
+
+    return pi, mean, cov
