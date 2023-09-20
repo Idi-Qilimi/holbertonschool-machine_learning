@@ -48,8 +48,4 @@ def kmeans(X, k, iterations=1000):
         distances = np.sqrt(((X - centroids_extended) ** 2).sum(axis=2))
         clss = np.argmin(distances, axis=0)
 
-        # if there are ano changes
-        if (centroids == C).all():
-            break
-
     return C, clss
