@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ E-step: expected value of likelihood function
-    respect the conditional distribution
-"""
-
+    respect the conditional distribution"""
 import numpy as np
+pdf = __import__('5-pdf').pdf
+
 
 def expectation(X, pi, m, S):
     """
