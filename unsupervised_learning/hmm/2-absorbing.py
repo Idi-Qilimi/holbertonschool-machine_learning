@@ -25,8 +25,8 @@ def absorbing(P):
     if (diagonal == 1).all():
         return True
     absorb = (diagonal == 1)
-    for row in range(len(diagonal)):
-        for col in range(len(diagonal)):
+    for col in range(len(diagonal)):
+        for row in range(len(diagonal)):
             if P[row, col] > 0 and absorb[col]:
                 absorb[row] = 1
     if (absorb == 1).all():
