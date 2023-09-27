@@ -1,33 +1,42 @@
 #!/usr/bin/env python3
-""" Absorbing Markov chain"""
+"""
+A function that performs the forward algorithm
+for a hidden markov model
+"""
 import numpy as np
 
 
-def absorbing(P):
+def forward(Observation, Emission, Transition, Initial):
     """
-    Function that determines if a markov chain is absorbing
+    A function that performs the forward algorithm
+    for a hidden markov model
     """
-    if len(P.shape) != 2:
-        return None
-    n1, n2 = P.shape
-    if (n1 != n2) or type(P) is not np.ndarray:
-        return None
-    D = np.diagonal(P)
-    if (D == 1).all():
-        return True
-    if not (D == 1).any():
-        return False
-    """
-    For each diagonal element (where i == j)
-    check the transition probabilities of the next state  and the previous state
-    If both of these probabilities are zero, it implies that the current state is not absorbing
-    as there are transitions out of it
-    """
-    for i in range(n1):
-        print('this is Pi {}'.format(P[i]))
-        for j in range(n2):
-            print('this is Pj {}'.format(P[j]))
-            if (i == j) and (i + 1 < len(P)):
-                if P[i + 1][j] == 0 and P[i][j + 1] == 0:
-                    return False
-    return True
+    if type(Observation) is not np.ndarray or len(Observation.shape) != 1:
+        return None, None
+    if type(Emission) is not np.ndarray or len(Emission.shape) != 2:
+        return None, None
+    if type(Transition) is not np.ndarray or len(Transition.shape) != 2:
+        return None, None
+    if type(Initial) is not np.ndarray or len(Initial.shape) != 2:
+        return None, None
+    sum_test = np.sum(Emission, axis=1)
+    if not (sum_test == 1.0).all():
+        return None, None
+    sum_test = np.sum(Transition, axis=1)
+    if not (sum_test == 1.0).all():
+        return None, None
+    sum_test = np.sum(Initial, axis=0)
+    if not (sum_test == 1.0).all():
+        return None, None
+    N, M = Emission.shape
+    T = Observation.shape[0]
+    if N != Transition.shape[0] or N != Transition.shape[1]:
+        return None, None
+    alpha = np.zeros((N, T))
+    alpha[:, 0] = Initial.T * Emission[:, Observation[0]]
+    for col in range(1, T):
+        for row in range(N):
+            aux = alpha[:, col - 1] * Transition[:, row]
+            alpha[row, col] = np.sum(aux * Emission[row, Observation[col]])
+    P = np.sum(alpha[:, -1])
+    return P, alpha
