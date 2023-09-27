@@ -5,7 +5,7 @@ import numpy as np
 
 def regular(P):
     """
-    Function that determines the steady state probabilities of a regular markov chain
+    Determine the steady state probabilities of a regular markov chain
     """
     try:
         if len(P.shape) != 2:
@@ -15,8 +15,8 @@ def regular(P):
             return None
         evals, evecs = np.linalg.eig(P.T)
         """
-         break down a matrix into its constituent parts
-         where the eigenvectors represent the directions in which the matrix scales
+         break down a matrix into parts where the eigenvectors
+         represent the directions in which the matrix scales
          and the eigenvalues represent the scaling factors
         """
         state = (evecs / evecs.sum())
