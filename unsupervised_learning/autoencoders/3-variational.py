@@ -3,6 +3,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
+
 def autoencoder(input_dims, hidden_layers, latent_dims):
     """Variational Autoencoder"""
     encoder_inputs = tf.keras.Input(shape=(input_dims,))
@@ -15,7 +16,8 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     dim = tf.shape(z_mean)[1]
     epsilon = tf.keras.backend.random_normal(shape=(batch, dim))
     z = z_mean + tf.exp(0.5 * z_log_var) * epsilon
-    encoder = models.Model(encoder_inputs, [z, z_mean, z_log_var], name='encoder')
+    encoder = models.Model(
+              encoder_inputs, [z, z_mean, z_log_var], name='encoder')
     latent_inputs = tf.keras.Input(shape=(latent_dims,))
     x = latent_inputs
     for units in reversed(hidden_layers):
