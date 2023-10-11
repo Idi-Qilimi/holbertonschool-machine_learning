@@ -24,8 +24,10 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     decoder = models.Model(latent_inputs, decoder_outputs, name='decoder')
     auto_outputs = decoder(encoder(encoder_inputs)[0])
     auto = models.Model(encoder_inputs, auto_outputs, name='vae')
-    xent_loss = input_dims * tf.keras.losses.binary_crossentropy(encoder_inputs, auto_outputs)
-    kl_loss = -0.5 * tf.reduce_sum(1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var), axis=-1)
+    xent_loss = input_dims * tf.keras.losses.binary_crossentropy(
+                encoder_inputs, auto_outputs)
+    kl_loss = -0.5 * tf.reduce_sum(1 + z_log_var - tf.square(z_mean)
+                                   - tf.exp(z_log_var), axis=-1)
     vae_loss = tf.reduce_mean(xent_loss + kl_loss)
     auto.add_loss(vae_loss)
     auto.compile(optimizer='adam', loss=None)
