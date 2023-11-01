@@ -1,13 +1,10 @@
 -- Ranks Glam rock bands by longevity
 SELECT 
-    band_name AS "band_name",
-    (CASE 
-        WHEN split = NULL THEN 2020 - formed
-        ELSE split - formed
-    END) AS "lifespan until 2020 (in years)"
+    band_name, 
+    COALESCE(split, YEAR(CURDATE())) - formed AS lifespan
 FROM 
     metal_bands
 WHERE 
-    style = 'Glam rock'
+    style LIKE '%Glam rock%'
 ORDER BY 
-    "lifespan until 2020 (in years)" DESC;
+    lifespan DESC;
