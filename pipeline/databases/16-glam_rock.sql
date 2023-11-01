@@ -1,3 +1,4 @@
+-- Ranks Glam rock bands by longevity
 SELECT 
     band_name AS "band_name",
     (CASE 
